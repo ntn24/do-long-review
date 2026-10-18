@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#070913" />
+  <meta name="description" content="Đỗ Long Review — Studio AI viết hook, voice, TikTok, công dụng và quét văn bản." />
+  <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="ambient ambient-a"></div><div class="ambient ambient-b"></div>
+  <div class="app-frame">
+    <header class="topbar">
+      <button class="brand-mini" id="goHome" type="button" aria-label="Về trang chủ">
+        <span class="brand-emblem">DL<span class="brand-dot">.</span></span>
+        <span class="brand-mini-text">LONG'S<br><b>CREATOR LAB</b></span>
+      </button>
+      <div class="top-actions">
+        <span id="statusBadge" class="status-badge"><i class="status-dot"></i><span>Đang kiểm tra...</span></span>
+        <button id="historyBtn" type="button" class="round-action" aria-label="Lịch sử" title="Lịch sử làm việc"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5M12 7v5l3 2" /></svg></button>
+      </div>
+    </header>
+
+    <main>
+      <section id="home" class="view active" aria-labelledby="heroTitle">
+        <div class="hero">
+          <div class="hero-topline"><span class="sparkle">✦</span> YOUR CREATIVE PLAYGROUND <span class="sparkle">✦</span></div>
+          <div class="hero-lettering" id="heroTitle"><span>ĐỖ LONG</span><strong>REVIEW<span class="period">.</span></strong></div>
+          <div class="hero-stroke"></div>
+          <p class="hero-desc">Ý tưởng chạm cảm xúc.<br><b>Hook chạm đúng nỗi đau.</b></p>
+          <div class="hero-actions"><button id="startBtn" class="primary-btn hero-cta">Bắt đầu sáng tạo <span>↗</span></button><span class="hero-count"><span class="pulse-light"></span> 5 CÔNG CỤ AI</span></div>
+          <div class="hero-orbit one"></div><div class="hero-orbit two"></div><div class="hero-light"></div>
+        </div>
+        <div class="feature-head"><div><span class="eyebrow">CHỌN KHÔNG GIAN CỦA BẠN</span><h2>Studio sáng tạo <span class="arrow-decor">↘</span></h2></div><span class="feature-index">01 / 05</span></div>
+        <div class="tool-grid">
+          <button class="tool-tile tile-hook" data-nav="hook"><span class="tile-top"><span class="tile-icon">✺</span><span class="tile-no">01</span></span><span class="tile-name">VIẾT HOOK</span><span class="tile-desc">3 giây đầu cuốn người xem.</span><span class="tile-arrow">↗</span></button>
+          <button class="tool-tile tile-voice" data-nav="voice"><span class="tile-top"><span class="tile-icon">≋</span><span class="tile-no">02</span></span><span class="tile-name">VOICE</span><span class="tile-desc">Giọng nói thành văn bản.</span><span class="tile-arrow">↗</span></button>
+          <button class="tool-tile tile-tiktok" data-nav="tiktok"><span class="tile-top"><span class="tile-icon">▷</span><span class="tile-no">03</span></span><span class="tile-name">LINK TIKTOK</span><span class="tile-desc">Chép lời thoại. Viết lại sắc bén.</span><span class="tile-arrow">↗</span></button>
+          <button class="tool-tile tile-benefits" data-nav="benefits"><span class="tile-top"><span class="tile-icon">◇</span><span class="tile-no">04</span></span><span class="tile-name">CÔNG DỤNG</span><span class="tile-desc">Lọc đúng ý chính từ video.</span><span class="tile-arrow">↗</span></button>
+          <button class="tool-tile tile-scan" data-nav="scan"><span class="tile-top"><span class="tile-icon">▣</span><span class="tile-no">05</span></span><span class="tile-name">QUÉT VĂN BẢN</span><span class="tile-desc">Đưa máy lên, có ngay chữ để copy.</span><span class="tile-arrow">↗</span></button>
+        </div>
+        <div class="home-bottom"><span>BUILT TO CREATE. MADE TO CONVERT.</span><span>© ĐỖ LONG REVIEW</span></div>
+      </section>
+
+      <section id="hook" class="view tool-view" aria-labelledby="hookTitle">
+        <div class="section-lead"><span class="eyebrow accent">01 / CONTENT ENGINE</span><h1 id="hookTitle">VIẾT <em>HOOK.</em></h1><p>Hook 3 giây đánh đúng nỗi đau, sau đó chốt thành lời thoại bán hàng dễ đọc.</p></div>
+        <div class="work-card">
+          <label class="field-label" for="hookName">TÊN SẢN PHẨM <span>01</span></label>
+          <input id="hookName" type="text" placeholder="Ví dụ: Hình xăm dán chống nước" autocomplete="off" />
+          <label class="field-label" for="hookUpload">ẢNH SẢN PHẨM <span>02</span></label>
+          <label class="upload-zone" for="hookUpload" id="hookUploadZone"><input id="hookUpload" type="file" accept="image/png,image/jpeg,image/webp" hidden />
+            <span class="upload-circle">＋</span><span class="upload-title">Chạm để tải ảnh sản phẩm</span><small>JPG, PNG, WebP · tối đa 8 MB</small><img id="hookPreview" class="thumb-preview" alt="Ảnh sản phẩm được chọn" hidden /></label>
+          <label class="field-label" for="hookPrompt">YÊU CẦU / NỖI ĐAU KHÁCH HÀNG <span>03</span></label>
+          <textarea id="hookPrompt" rows="4" placeholder="Ví dụ: Khách thích xăm nhưng sợ đau, muốn thử trước khi xăm thật. Viết hook cực gắt và thoại 60 giây..."></textarea>
+          <div class="chip-row"><button class="idea-chip" data-idea="Khách sợ đau, sợ mua về không dùng được. Hook 3 giây đánh trúng nỗi lo." type="button">Sợ đau / sợ phí</button><button class="idea-chip" data-idea="Mở đầu bằng bình luận giả lập cà khịa cực tự nhiên, gây tranh cãi vừa phải." type="button">Bình luận cà khịa</button><button class="idea-chip" data-idea="Đặt vấn đề giá trị nhận được so với số tiền bỏ ra, không bịa giá." type="button">Giá trị / giá bán</button></div>
+          <button id="hookGo" type="button" class="primary-btn action-btn"><span>✺</span> TẠO HOOK CỰC CUỐN <span class="btn-arrow">↗</span></button>
+        </div>
+        <div class="result-card" id="hookResultWrap" hidden><div class="result-title"><span><i class="tiny-star">✦</i> KẾT QUẢ ĐỖ LONG AI</span><button class="copy-btn" data-copy="hookResult" type="button">Sao chép ↗</button></div><div class="output-text" id="hookResult" aria-live="polite"></div><div class="follow-line"><span>MUỐN TINH CHỈNH?</span><input id="hookFollow" placeholder="Ví dụ: gắt hơn, tự nhiên hơn, ngắn 30s..." /><button data-follow="hook" type="button">Gửi →</button></div></div>
+      </section>
+
+      <section id="voice" class="view tool-view" aria-labelledby="voiceTitle">
+        <div class="section-lead"><span class="eyebrow accent">02 / AUDIO TO TEXT</span><h1 id="voiceTitle">VOICE<span class="outline-period">.</span></h1><p>Ghi âm hoặc tải file giọng nói. Chép lời rõ ràng, có dấu câu và dễ sao chép.</p></div>
+        <div class="work-card">
+          <div class="mic-widget"><div class="mic-halo"><button id="recordBtn" class="record-button" type="button" aria-label="Bắt đầu ghi âm"><svg viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="13" rx="3"></rect><path d="M5 10a7 7 0 0 0 14 0M12 17v5m-5 0h10"></path></svg></button></div><strong id="recordLabel">NHẤN ĐỂ GHI ÂM</strong><span id="recordTime">00:00</span><div class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span class="mic-help">Cho phép quyền micro khi điện thoại hỏi</span></div>
+          <label class="upload-zone compact" for="voiceUpload"><input id="voiceUpload" type="file" accept="audio/*,video/mp4,video/quicktime" hidden /><span class="upload-circle">↑</span><span class="upload-title">Hoặc tải file âm thanh / video</span><small id="voiceFileLabel">MP3, M4A, WAV, WebM, MP4 · tối đa 75MB</small></label>
+          <label class="switchline"><input id="voiceStyle" type="checkbox" checked /><span class="switch-custom"></span><span>Áp dụng kiểu viết tắt bạn đã quy định (m, t, ngta, nv...)</span></label>
+          <button id="voiceGo" type="button" class="primary-btn action-btn">CHÉP VOICE NGAY <span class="btn-arrow">↗</span></button>
+        </div>
+        <div class="result-card" id="voiceResultWrap" hidden><div class="result-title"><span><i class="tiny-star">✦</i> NỘI DUNG ĐÃ CHÉP</span><button class="copy-btn" data-copy="voiceResult" type="button">Sao chép ↗</button></div><div id="voiceResult" class="output-text" aria-live="polite"></div><p class="caution">Bản chép AI có thể sai tên riêng/từ khó. Nên đối chiếu lại âm thanh.</p><div class="follow-line"><span>YÊU CẦU BIÊN TẬP THÊM</span><input id="voiceFollow" placeholder="Ví dụ: xuống dòng rõ hơn, giữ nguyên lời thoại..." /><button data-follow="voice" type="button">Gửi →</button></div></div>
+      </section>
+
+      <section id="tiktok" class="view tool-view" aria-labelledby="tiktokTitle">
+        <div class="section-lead"><span class="eyebrow accent">03 / VIDEO TRANSCRIPT</span><h1 id="tiktokTitle">LINK <em>TIKTOK.</em></h1><p>Dán link video công khai để lấy lời thoại. Có thể tải MP4 lên nếu TikTok hạn chế truy cập.</p></div>
+        <div class="work-card">
+          <label class="field-label" for="tiktokUrl">DÁN LINK VIDEO</label>
+          <div class="url-input"><span>↗</span><input id="tiktokUrl" type="url" placeholder="https://www.tiktok.com/@.../video/..." /></div>
+          <label class="upload-zone compact" for="tiktokUpload"><input id="tiktokUpload" type="file" accept="video/*,audio/*" hidden /><span class="upload-circle">↑</span><span class="upload-title">Hoặc tải video lên</span><small id="tiktokFileLabel">Ưu tiên MP4 · file tối đa 75MB</small></label>
+          <button id="tiktokGo" type="button" class="primary-btn action-btn">CHÉP NGUYÊN VĂN VIDEO <span class="btn-arrow">↗</span></button>
+        </div>
+        <div class="result-card" id="tiktokResultWrap" hidden><div class="result-title"><span><i class="tiny-star">✦</i> LỜI THOẠI GỐC</span><button class="copy-btn" data-copy="tiktokResult" type="button">Sao chép ↗</button></div><div id="tiktokResult" class="output-text" aria-live="polite"></div><p class="caution">Vui lòng nghe đối chiếu lại để bảo đảm không sót chữ.</p>
+          <div class="secondary-task"><span class="eyebrow accent">02 / TẠO BẢN MỚI</span><h3>Viết lại từ video này</h3><textarea id="rewritePrompt" rows="3" placeholder="Ví dụ: Dựa vào lời thoại trên viết lại không trùng lặp, hook nỗi đau 3 giây đầu, giọng tự nhiên 60 giây..."></textarea><button id="rewriteGo" type="button" class="outline-btn">VIẾT LẠI HOOK + KỊCH BẢN <span>↗</span></button></div></div>
+        <div class="result-card" id="rewriteResultWrap" hidden><div class="result-title"><span><i class="tiny-star">✦</i> BẢN VIẾT LẠI</span><button class="copy-btn" data-copy="rewriteResult" type="button">Sao chép ↗</button></div><div id="rewriteResult" class="output-text" aria-live="polite"></div><div class="follow-line"><span>CHỈNH TIẾP</span><input id="rewriteFollow" placeholder="Ví dụ: viết gắt hơn nhưng vẫn đúng ý..." /><button data-follow="rewrite" type="button">Gửi →</button></div></div>
+      </section>
+
+      <section id="benefits" class="view tool-view" aria-labelledby="benefitsTitle">
+        <div class="section-lead"><span class="eyebrow accent">04 / PRODUCT INSIGHTS</span><h1 id="benefitsTitle">CÔNG DỤNG <em>SP.</em></h1><p>Chỉ lọc đúng công dụng, điểm nổi bật được nói trong video. Không tự thêm thành phần hay lời hứa.</p></div>
+        <div class="work-card">
+          <label class="field-label" for="benefitsUrl">LINK VIDEO TIKTOK</label><div class="url-input"><span>↗</span><input id="benefitsUrl" type="url" placeholder="Dán link TikTok có nhắc đến sản phẩm" /></div>
+          <label class="upload-zone compact" for="benefitsUpload"><input id="benefitsUpload" type="file" accept="video/*,audio/*" hidden /><span class="upload-circle">↑</span><span class="upload-title">Hoặc tải video lên</span><small id="benefitsFileLabel">Đọc lời thoại trong video</small></label>
+          <label class="field-label" for="benefitsPrompt">GHI CHÚ (KHÔNG BẮT BUỘC)</label><textarea id="benefitsPrompt" rows="3" placeholder="Ví dụ: Lọc tên sản phẩm và 5 điểm nổi bật trong video, ghi ngắn gọn đúng ý."></textarea>
+          <button id="benefitsGo" type="button" class="primary-btn action-btn">PHÂN TÍCH CÔNG DỤNG <span class="btn-arrow">↗</span></button>
+        </div>
+        <div class="result-card" id="benefitsResultWrap" hidden><div class="result-title"><span><i class="tiny-star">✦</i> NỘI DUNG ĐÃ LỌC</span><button class="copy-btn" data-copy="benefitsResult" type="button">Sao chép ↗</button></div><div id="benefitsResult" class="output-text" aria-live="polite"></div><div class="follow-line"><span>YÊU CẦU THÊM</span><input id="benefitsFollow" placeholder="Ví dụ: rút gọn thành 4 ý dễ chèn vào ảnh" /><button data-follow="benefits" type="button">Gửi →</button></div></div>
+      </section>
+
+      <section id="scan" class="view tool-view" aria-labelledby="scanTitle">
+        <div class="section-lead"><span class="eyebrow accent">05 / SMART SCANNER</span><h1 id="scanTitle">QUÉT <em>VĂN BẢN.</em></h1><p>Mở camera, hướng vào giấy hoặc bảng chữ rồi chụp. Chữ được đưa về dạng văn bản để copy ngay.</p></div>
+        <div class="work-card scanner-card">
+          <div class="camera-screen"><video id="cameraVideo" autoplay muted playsinline hidden></video><div id="cameraPlaceholder" class="camera-placeholder"><span class="scan-frame-icon">⌗</span><strong>CAMERA SCANNER</strong><span>Chạm “Mở camera” để bắt đầu</span></div><div class="scan-guides"><i></i><i></i><i></i><i></i></div></div>
+          <div class="camera-actions"><button id="openCamera" class="outline-btn small">MỞ CAMERA</button><button id="flipCamera" class="outline-btn small">ĐỔI CAMERA ↻</button><button id="snapCamera" class="camera-shutter" aria-label="Chụp để quét" type="button" disabled><span></span></button></div>
+          <div class="camera-divider">HOẶC</div>
+          <label class="upload-zone compact" for="scanUpload"><input id="scanUpload" type="file" accept="image/*" capture="user" hidden /><span class="upload-circle">↑</span><span class="upload-title">Chụp ảnh / chọn ảnh có chữ</span><small id="scanFileLabel">Hỗ trợ ảnh giấy, bảng, màn hình, chữ in</small></label>
+          <img id="scanPreview" class="scan-preview" alt="Ảnh chuẩn bị quét" hidden />
+          <button id="scanGo" type="button" class="primary-btn action-btn">NHẬN DIỆN VĂN BẢN <span class="btn-arrow">↗</span></button>
+          <p class="caution">Camera hoạt động trên HTTPS hoặc localhost và cần bạn cấp quyền. Mặc định mở camera trước theo yêu cầu; có thể đảo camera để quét giấy rõ hơn.</p>
+        </div>
+        <div class="result-card" id="scanResultWrap" hidden><div class="result-title"><span><i class="tiny-star">✦</i> VĂN BẢN ĐÃ QUÉT</span><button class="copy-btn" data-copy="scanResult" type="button">Sao chép ↗</button></div><div id="scanResult" class="output-text" aria-live="polite"></div></div>
+      </section>
+    </main>
+
+    <div class="social-float" aria-label="Kết nối với Đỗ Long Review"><a href="https://www.tiktok.com/@.long.review8?_r=1&_t=ZS-9AeGYiuznJU" target="_blank" rel="noopener noreferrer" title="TikTok Đỗ Long Review" class="social-bubble tiktok-social" aria-label="TikTok"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M21.4 3.5c.4 3.5 2.4 5.5 6 5.8v5.2c-2.4.1-4.6-.6-6.5-2.1v9.2c0 6.9-7.8 10.5-13.2 6.2-5.4-4.3-3.5-13.2 3.1-15 1.5-.4 3.3-.4 4.6 0v5.3c-4.1-1.6-7.1 1.9-5.1 5 1.9 2.8 5.2 1.8 5.2-2V3.5h5.9z"/></svg></a><a href="https://zalo.me/0904337433" target="_blank" rel="noopener noreferrer" title="Zalo Đỗ Long Review" class="social-bubble zalo-social" aria-label="Zalo">Zalo</a></div>
+    <nav class="bottom-nav" aria-label="Công cụ"><button data-nav="hook" type="button"><span class="nav-symbol">✺</span><span>HOOK</span></button><button data-nav="voice" type="button"><span class="nav-symbol">≋</span><span>VOICE</span></button><button data-nav="tiktok" type="button"><span class="nav-symbol">▷</span><span>TIKTOK</span></button><button data-nav="benefits" type="button"><span class="nav-symbol">◇</span><span>CÔNG DỤNG</span></button><button data-nav="scan" type="button"><span class="nav-symbol">▣</span><span>QUÉT CHỮ</span></button></nav>
+  </div>
+
+  <div id="historyModal" class="overlay" hidden><div class="modal-panel"><div class="modal-title"><div><span class="eyebrow accent">YOUR CREATIVE LOG</span><h2>Lịch sử của bạn</h2></div><button class="close-btn" id="closeHistory" type="button" aria-label="Đóng">×</button></div><p class="modal-note">Các phiên được lưu trong cơ sở dữ liệu của website theo thiết bị này, không phải lịch sử ChatGPT.</p><div id="historyList" class="history-list"></div></div></div>
+  <div id="pinModal" class="overlay" hidden><div class="modal-panel pin-panel"><span class="eyebrow accent">PRIVATE ACCESS</span><h2>Nhập mã truy cập</h2><p>Trang web được bảo vệ bằng mã riêng do người quản trị cài đặt.</p><form id="pinForm"><input id="pinInput" type="password" autocomplete="current-password" placeholder="Mã truy cập" required /><button class="primary-btn action-btn" type="submit">MỞ STUDIO ↗</button></form></div></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
