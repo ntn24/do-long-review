@@ -20,6 +20,8 @@ from urllib.parse import urlsplit
 
 from dotenv import load_dotenv
 from fastapi import FastAPI, File, Form, Header, HTTPException, UploadFile
+from fastapi.middleware.cors import CORSMiddleware
+import logging
 from fastapi.responses import FileResponse, JSONResponse, StreamingResponse
 from pydantic import BaseModel
 
@@ -36,6 +38,36 @@ MAX_IMAGE = 8 * 1024 * 1024
 MAX_MEDIA = 75 * 1024 * 1024
 
 app = FastAPI(title='ĐỖ LONG REVIEW API', docs_url=None, redoc_url=None)
+
+# Cho giao diện GitHub Pages kết nối API Render; giữ khóa bí mật trên Render.
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=['https://ntn24.github.io'],
+    allow_credentials=False,
+    allow_methods=['GET', 'POST', 'OPTIONS'],
+    allow_headers=['Content-Type', 'X-App-Code'],
+    max_age=3600,
+)
+
+def friendly_api_error(exc: Exception) -> str:
+    status = getattr(exc, 'status_code', None)
+    if status == 401:
+        return 'Khóa OpenAI API không hợp lệ. Kiểm tra OPENAI_API_KEY trên Render.'
+    if status == 429:
+        return 'OpenAI API đã hết hạn mức hoặc chưa có credit. Kiểm tra Billing và Usage.'
+    if status == 403:
+        return 'Tài khoản API chưa được cấp quyền dùng model này.'
+    if status == 400:
+        return 'OpenAI không chấp nhận dữ liệu. Hãy thử ảnh hoặc video khác.'
+    if status in (500, 502, 503, 504):
+        return 'Dịch vụ AI đang gặp lỗi tạm thời. Hãy thử lại sau.'
+    return 'Máy chủ xử lý không thành công. Mở Render → Logs để xem nguyên nhân.'
+
+@app.exception_handler(Exception)
+async def unexpected_error(request, exc: Exception):
+    logging.exception('ĐỖ LONG REVIEW request failed at %s', request.url.path)
+    return JSONResponse(status_code=502, content={'detail': friendly_api_error(exc)})
+
 
 with sqlite3.connect(DB_PATH) as db:
     db.execute('''CREATE TABLE IF NOT EXISTS events (
@@ -207,7 +239,7 @@ def generate_stream(mode: str = Form(...), message: str = Form(''), product_name
                 record_event(client_id, mode, f'{product_name}: {message}', answer, source_text)
             yield 'data: ' + json.dumps({'type': 'done', 'saved': bool(answer)}) + '\n\n'
         except Exception as exc:
-            yield 'data: ' + json.dumps({'type': 'error', 'message': str(exc)[:300]}, ensure_ascii=False) + '\n\n'
+            yield 'data: ' + json.dumps({'type': 'error', 'message': friendly_api_error(exc)}, ensure_ascii=False) + '\n\n'
 
     return StreamingResponse(stream(), media_type='text/event-stream', headers={'Cache-Control': 'no-cache', 'X-Accel-Buffering': 'no'})
 
