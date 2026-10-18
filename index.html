@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <meta name="theme-color" content="#070913" />
   <meta name="description" content="Đỗ Long Review — Studio AI viết hook, voice, TikTok, công dụng và quét văn bản." />
-  <link rel="icon" type="image/svg+xml" href="/icon.svg" />
-  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="icon" type="image/svg+xml" href="./icon.svg" />
+  <link rel="manifest" href="./manifest.webmanifest" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/styles.css" />
-  <script src="/app.js" defer></script>
+  <link rel="stylesheet" href="./styles.css" />
+  <script src="./app.js" defer></script>
 </head>
 <body>
   <div class="ambient ambient-a"></div><div class="ambient ambient-b"></div>
@@ -23,7 +23,7 @@
       </button>
       <div class="top-actions">
         <span id="statusBadge" class="status-badge"><i class="status-dot"></i><span>Đang kiểm tra...</span></span>
-        <button id="historyBtn" type="button" class="round-action" aria-label="Lịch sử" title="Lịch sử làm việc"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5M12 7v5l3 2" /></svg></button>
+        <button id="serverBtn" type="button" class="round-action" aria-label="Kết nối máy chủ AI" title="Kết nối máy chủ AI">⚙</button><button id="historyBtn" type="button" class="round-action" aria-label="Lịch sử" title="Lịch sử làm việc"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5M12 7v5l3 2" /></svg></button>
       </div>
     </header>
 
@@ -120,6 +120,7 @@
 
   <div id="historyModal" class="overlay" hidden><div class="modal-panel"><div class="modal-title"><div><span class="eyebrow accent">YOUR CREATIVE LOG</span><h2>Lịch sử của bạn</h2></div><button class="close-btn" id="closeHistory" type="button" aria-label="Đóng">×</button></div><p class="modal-note">Các phiên được lưu trong cơ sở dữ liệu của website theo thiết bị này, không phải lịch sử ChatGPT.</p><div id="historyList" class="history-list"></div></div></div>
   <div id="pinModal" class="overlay" hidden><div class="modal-panel pin-panel"><span class="eyebrow accent">PRIVATE ACCESS</span><h2>Nhập mã truy cập</h2><p>Trang web được bảo vệ bằng mã riêng do người quản trị cài đặt.</p><form id="pinForm"><input id="pinInput" type="password" autocomplete="current-password" placeholder="Mã truy cập" required /><button class="primary-btn action-btn" type="submit">MỞ STUDIO ↗</button></form></div></div>
+  <div id="serverModal" class="overlay" hidden><div class="modal-panel"><div class="modal-title"><div><span class="eyebrow accent">AI SERVER</span><h2>Kết nối máy chủ AI</h2></div><button class="close-btn" id="closeServer" type="button" aria-label="Đóng">×</button></div><p class="modal-note">Giao diện trên GitHub Pages; AI xử lý qua Render. Đây là địa chỉ Render, KHÔNG phải API Key.</p><form id="serverForm" class="server-form"><label for="serverUrl">Địa chỉ máy chủ Render (HTTPS)</label><input id="serverUrl" type="url" placeholder="https://do-long-review.onrender.com" autocomplete="url" required/><button type="submit" class="primary-btn action-btn">LƯU & KIỂM TRA KẾT NỐI ↗</button></form><p class="modal-note">Render Free có thể mất hơn 50 giây để thức dậy.</p></div></div>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 </body>
 </html>
