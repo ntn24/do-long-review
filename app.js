@@ -2,6 +2,12 @@
 (() => {
   'use strict';
   const $ = (id) => document.getElementById(id);
+  const GITHUB_FRONTEND = location.hostname.endsWith('.github.io');
+  const DEFAULT_API = 'https://do-long-review.onrender.com';
+  const backend = () => (localStorage.getItem('dlr_backend_url') || DEFAULT_API).replace(/\/$/, '');
+  const apiUrl = (path) => GITHUB_FRONTEND && path.startsWith('/api/') ? backend() + path : path;
+  const parseApiError = (e) => { if (e instanceof TypeError) return new Error('Không kết nối được Render. Kiểm tra biểu tượng bánh răng ⚙ và thử lại sau khi máy chủ thức dậy.'); return e; };
+
   const memoryFallback = new Map();
   const fallbackStorage = {getItem: k => memoryFallback.get(k) || null, setItem: (k,v) => memoryFallback.set(k,String(v)), removeItem: k => memoryFallback.delete(k)};
   function storageFor(name) { try { const value=window[name]; const key='dlr_probe'; value.setItem(key,'1'); value.removeItem(key); return value; } catch { return fallbackStorage; } }
@@ -30,11 +36,11 @@
   }
   async function jsonRequest(endpoint, options = {}) {
     let response;
-    try { response = await fetch(endpoint, { ...options, headers: { ...headers(!!options.json), ...(options.headers || {}) }, body: options.json ? JSON.stringify(options.json) : options.body }); }
-    catch { throw new Error('Không kết nối được máy chủ. Hãy mở trang qua địa chỉ web đã triển khai.'); }
+    try { response = await fetch(apiUrl(endpoint), { ...options, headers: { ...headers(!!options.json), ...(options.headers || {}) }, body: options.json ? JSON.stringify(options.json) : options.body }); }
+    catch { throw new Error('Không kết nối được Render. Bấm ⚙ để kiểm tra địa chỉ máy chủ.'); }
     const result = await response.json().catch(() => ({}));
     if (response.status === 401) openPin();
-    if (!response.ok) throw new Error(result.detail || 'Có lỗi khi thực hiện yêu cầu.');
+    if (!response.ok) throw new Error(result.detail || ('Máy chủ báo lỗi HTTP ' + response.status));
     return result;
   }
   async function callStream({ mode, message = '', product = '', source = '', image = null, outputId, wrapId }) {
@@ -45,7 +51,7 @@
     setBusy(true); displayResult(wrapId, outputId, '', true);
     let answer = '';
     try {
-      const response = await fetch('/api/generate-stream', { method: 'POST', headers: headers(), body: form });
+      const response = await fetch(apiUrl('/api/generate-stream'), { method: 'POST', headers: headers(), body: form });
       if (!response.ok) {
         const body = await response.json().catch(() => ({}));
         if (response.status === 401) openPin();
@@ -68,7 +74,7 @@
       if (!answer.trim()) throw new Error('AI chưa trả về nội dung. Hãy thử lại.');
       toast('Đã tạo nội dung và lưu lịch sử.');
       setTimeout(() => $(wrapId).scrollIntoView({ behavior: 'smooth', block: 'start' }), 180);
-    } catch (e) { if (!answer) { $(outputId).textContent = 'Chưa có kết quả.'; } toast(e.message, true); }
+    } catch (e) { e = parseApiError(e); if (!answer) { $(outputId).textContent = 'Chưa có kết quả.'; } toast(e.message, true); }
     finally { $(outputId).classList.remove('streaming'); setBusy(false); }
   }
   function setBusy(flag) {
@@ -267,6 +273,25 @@
   const draftFields=['hookName','hookPrompt','tiktokUrl','rewritePrompt','benefitsUrl','benefitsPrompt'];
   function saveDrafts(){for(const id of draftFields)localStorage.setItem('dlr_draft_'+id,$(id).value);}
   draftFields.forEach(id=>{$(id).value=localStorage.getItem('dlr_draft_'+id)||'';$(id).addEventListener('input',saveDrafts);});
+
+  // GitHub Pages settings - NEVER ask for or store an OpenAI API key here.
+  $('serverBtn').addEventListener('click', () => { $('serverUrl').value = backend(); $('serverModal').hidden = false; });
+  $('closeServer').addEventListener('click', () => { $('serverModal').hidden = true; });
+  $('serverModal').addEventListener('click', e => { if (e.target === $('serverModal')) $('serverModal').hidden = true; });
+  $('serverForm').addEventListener('submit', async e => {
+    e.preventDefault();
+    const value = $('serverUrl').value.trim().replace(/\/$/, '');
+    try {
+      const u = new URL(value);
+      if (u.protocol !== 'https:' || !u.hostname.endsWith('.onrender.com')) throw Error('Chỉ dùng link HTTPS do Render cấp, có đuôi onrender.com.');
+      localStorage.setItem('dlr_backend_url', u.origin);
+      $('serverModal').hidden = true; toast('Đã lưu địa chỉ. Đang kiểm tra máy chủ...');
+      const status = await jsonRequest('/api/health');
+      const badge = $('statusBadge'); badge.classList.toggle('ready', status.aiConfigured); badge.classList.toggle('warn', !status.aiConfigured);
+      badge.querySelector('span').textContent = status.aiConfigured ? 'AI SẴN SÀNG' : 'CHƯA KẾT NỐI AI';
+      toast(status.aiConfigured ? 'Đã kết nối Render và nhận cấu hình AI.' : 'Đã kết nối Render nhưng chưa có API Key.');
+    } catch(err){toast(err.message || 'Không kết nối được máy chủ.',true);}
+  });
   (async function start(){
     try{const status=await jsonRequest('/api/health');const badge=$('statusBadge');badge.classList.add(status.aiConfigured?'ready':'warn');
       badge.querySelector('span').textContent=status.aiConfigured?'AI SẴN SÀNG':'CHƯA KẾT NỐI AI';
