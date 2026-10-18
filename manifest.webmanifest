@@ -1,10 +1,10 @@
 {
   "name": "ĐỖ LONG REVIEW — AI Creator Studio",
   "short_name": "ĐỖ LONG",
-  "start_url": "/",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#070913",
   "theme_color": "#070913",
   "description": "Studio AI tạo hook, chép voice, xử lý TikTok, công dụng và OCR.",
-  "icons": [{"src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable"}]
+  "icons": [{"src": "./icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable"}]
 }
